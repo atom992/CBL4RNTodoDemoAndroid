@@ -12,6 +12,11 @@ The main step as following:
 The result will be looks like this:
 ![image](https://github.com/atom992/CBL4RNTodoDemoAndroid/blob/master/README_RES/CBL4RNTodoDemoAndroid.gif)
 
+You can Clone or download this repository. It include all reference files.
+
+reference [Getting Started with React Native](https://facebook.github.io/react-native/docs/getting-started.html#requirements)
+Note:You should use Node.js 4.0 or newer.
+
 # Create a basic project with CBL Android and CBL java Listener
 
 reference [Create a new project with Android Studio](http://developer.couchbase.com/documentation/mobile/1.1.0/get-started/get-started-mobile/android/get-started-studio/index.html)
@@ -90,7 +95,7 @@ buildscript {
 4. Download [libs](https://github.com/couchbaselabs/Couchbase-Lite-PhoneGap-Plugin/tree/master/lib/android) and add libs (with out jackson-core-2.5.0.jar) into <project_home>/app/libs.
 
 Note: Couchbase-Lite-java using jackson-core-2.5.0.jar will conflict with React Native(using jackson-core-2.2.3.jar).
-After you add the libs, add the following line to the top-level dependencies section (not the one under the buildscript section), the dependencies section should look similar to this:
+After you add the libs, Expand the app folder, and then open the build.gradle file,add the following line to the top-level dependencies section (not the one under the buildscript section), the dependencies section should look similar to this:
 ```
 dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
@@ -159,7 +164,7 @@ java.lang.SecurityException: ConnectivityService: Neither user 10093 nor current
 
 ## Add native code
 You need to add some native code in order to start the React Native runtime and get it to render something. To do this, we're going to create an Activity that creates a ReactRootView, starts a React application inside it and sets it as the main content view.
-1. New a class under <project_home>/app/src/main/java/com/example/atom/cbl4rntododemo  folder,named MyReactActivity.java:
+1. New a class under <project_home>/app/src/main/java/com/example/atom/cbl4rntododemoandroid  folder,named MyReactActivity.java:
 
 ```
 package com.example.atom.cbl4rntododemoandroid;
@@ -349,7 +354,10 @@ $ npm init
 $ npm install --save react-native
 $ curl -o .flowconfig https://raw.githubusercontent.com/facebook/react-native/master/.flowconfig
 ```
-This creates a node module for your app and adds the react-native npm dependency. Now open the newly created package.json file and add this under scripts:
+This creates a node module for your app and adds the react-native npm dependency.
+Note: name should not be contain capital letters.
+      If you are first install react-native,may be you should use sudo to install react-native.
+Now open the newly created package.json file and add this under scripts:
 ```
 "start": "node_modules/react-native/packager/packager.sh"
 ```
