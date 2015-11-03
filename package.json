@@ -1,0 +1,15 @@
+{
+  "name": "cbl4rntododemoandroid",
+  "version": "1.0.0",
+  "description": "The Todo demo for integrating Couchbase Lite android with React Native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "author": "atom",
+  "license": "MIT",
+  "dependencies": {
+    "react-native": "^0.13.2"
+  }
+}
