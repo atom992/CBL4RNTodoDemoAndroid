@@ -10,7 +10,8 @@ var {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ToolbarAndroid
 } = React;
 
 
@@ -18,16 +19,26 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#111111'
+  },
+  toolbar: {
+    backgroundColor: '#e9eaed',
+    height: 56,
   }
 });
 
 
-var CBL4RNTodoDemoAndroid = React.createClass({
+var TodoLite = React.createClass({
   render: function() {
     return (
-      <Home/>
+      <View style={styles.container}>
+        <ToolbarAndroid
+          title="TodoLite ReactNative Android"
+          style={styles.toolbar}>
+        </ToolbarAndroid>
+        <Home/>
+      </View>
     );
   }
 });
 
-AppRegistry.registerComponent('CBL4RNTodoDemoAndroid', () => CBL4RNTodoDemoAndroid);
+AppRegistry.registerComponent('TodoLite-ReactNative-Android', () => TodoLite);
