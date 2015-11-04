@@ -11,7 +11,7 @@ Here's a sneak peek of what you are going to build:
 
 ![image](assets/thumbnail.png)
 
-You can download the completed project from [GitHub](https://github.com/atom992/CBL4RNTodoDemoAndroid).
+You can download the completed project from [GitHub](https://github.com/couchbaselabs/todolite-reactnative-android).
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ Before you start writing some JavaScript you need to create a new Android Studio
 
 ![image](assets/new-project.png)
 
-Set the minimum required SDK to [API 16: Android 4.1 or later](https://github.com/facebook/react-native#react-native---) and use the currently recommended Android API.
+Set the minimum required SDK to [API 16: Android 4.1 or later](https://github.com/facebook/react-native#react-native) and use the currently recommended Android API.
 After you fill in the fields, the New Project window should look something like this:
 
 ![image](assets/target-sdk.png)
@@ -605,7 +605,7 @@ Open the Admin UI to monitor the documents that were saved to Sync Gateway:
 
 > http://localhost:4985/_admin/
 
-Try adding more task documents and notice how they get pushed to Sync Gateway.
+Try adding more task documents and notice how they get pushed to Sync Gateway automatically.
 
 ## Where To Go From Here
 

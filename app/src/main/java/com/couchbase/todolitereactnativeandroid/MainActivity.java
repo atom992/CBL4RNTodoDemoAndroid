@@ -69,16 +69,8 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                         allowedCredentials.getPassword(),
                         listenPort));
     
-                CBL_URL = String.format(
-                        "http://%s:%s@localhost:%d/",
-                        allowedCredentials.getLogin(),
-                        allowedCredentials.getPassword(),
-                        listenPort);
-    
-    
             } catch (final Exception e) {
                 e.printStackTrace();
-                initFailed = true;
             }
     
         }
