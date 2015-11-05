@@ -1,7 +1,23 @@
+var CBLModule = require('CBLModule');
+var url ='http://127.0.0.1:5984/';
+{
+                    CBLModule.getUrl(
+                          (err) => {
+                              console.log('------ callback error--------' + err);
+                          },
+                          (msg) => {
+                            console.log('------ url--------' + msg);
+                              url = msg;
+                          }
+                    )
+
+}
+
 var api = {
-    url: 'http://127.0.0.1:5984',
+    url: url,
+
     saveTodo(title){
-        return fetch(this.url + '/todos/', {
+        return fetch(this.url + 'todos/', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -16,10 +32,10 @@ var api = {
 
 
     getTodos(){
-            return fetch(this.url + '/todos/_all_docs?include_docs=true').then((response) => {
+            return fetch(this.url + 'todos/_all_docs?include_docs=true').then((response) => {
               if (response.status !== 200) {
 
-                return fetch('http://127.0.0.1:5984/todos', {
+                return fetch(this.url + 'todos', {
                                             method:'PUT',
                                             headers: {
                                                 'Accept': 'application/json',
@@ -33,7 +49,7 @@ var api = {
         },
 
     startSync(){
-        return fetch(this.url + '/_replicate', {
+        return fetch(this.url + '_replicate', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'

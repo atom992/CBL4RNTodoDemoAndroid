@@ -1,16 +1,16 @@
 package com.example.atom.cbl4rntododemoandroid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+
 
 import com.facebook.react.LifecycleState;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
-import com.facebook.soloader.SoLoader;
-
 
 import com.couchbase.lite.android.AndroidContext;
 import com.couchbase.lite.Manager;
@@ -33,6 +33,8 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
     private ReactRootView mReactRootView;
     private ReactInstanceManager mReactInstanceManager;
 
+    private CBLReactPackage mCBLReactPackage;
+
     private final String TAG = "CBLEvents";
     private  String CBL_URL = "http://127.0.0.1:5984";
     private static final String DB_NAME = "cbldb";
@@ -47,96 +49,37 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
 
         Log.d(TAG,"Begin onCreate Events App");
 
+//        mCBLReactPackage = new CBLReactPackage(this);
         mReactRootView = new ReactRootView(this);
+
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
-                .addPackage(new MainReactPackage())
+//                .addPackage(new MainReactPackage())
+//                .addPackage(mCBLReactPackage)
+                .addPackage(new CBLReactPackage(this))
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
         mReactRootView.startReactApplication(mReactInstanceManager, "CBL4RNTodoDemoAndroid", null);
-
         setContentView(mReactRootView);
-        initCBLite();
+//        initCBLite(this.getApplicationContext());
         Log.d(TAG, "End onCreate Events App");
     }
 
-    private void initCBLite() {
-        try {
-
-//            allowedCredentials = new Credentials();
-
-            allowedCredentials = new Credentials("","");
-
-            URLStreamHandlerFactory.registerSelfIgnoreError();
-
-            View.setCompiler(new JavaScriptViewCompiler());
-
-            Manager server = startCBLite(new AndroidContext(this));
-
-            listenPort = startCBLListener(DEFAULT_LISTEN_PORT, server, allowedCredentials);
-
-
-
-            Log.i(TAG, "initCBLite() completed successfully with: " + String.format(
-                    "http://%s:%s@localhost:%d/",
-                    allowedCredentials.getLogin(),
-                    allowedCredentials.getPassword(),
-                    listenPort));
-
-            CBL_URL = String.format(
-                    "http://%s:%s@localhost:%d/",
-                    allowedCredentials.getLogin(),
-                    allowedCredentials.getPassword(),
-                    listenPort);
-
-
-        } catch (final Exception e) {
-            e.printStackTrace();
-            initFailed = true;
-        }
-
-    }
-
-    protected Manager startCBLite(AndroidContext context) {
-        Manager manager;
-        try {
-            Manager.enableLogging(Log.TAG, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_SYNC, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_QUERY, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_VIEW, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_CHANGE_TRACKER, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_BLOB_STORE, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_DATABASE, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_LISTENER, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_MULTI_STREAM_WRITER, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_REMOTE_REQUEST, Log.VERBOSE);
-            Manager.enableLogging(Log.TAG_ROUTER, Log.VERBOSE);
-            manager = new Manager(context, Manager.DEFAULT_OPTIONS);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return manager;
-    }
-
-    private int startCBLListener(int listenPort, Manager manager, Credentials allowedCredentials) {
-
-        LiteListener listener = new LiteListener(manager, listenPort, allowedCredentials);
-        int boundPort = listener.getListenPort();
-        Thread thread = new Thread(listener);
-        thread.start();
-        return boundPort;
-
-    }
-
+//    @Override
+//    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        mCBLReactPackage.handleActivityResult(requestCode, resultCode, data);
+//    }
 
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(TAG, CBL_URL);
         if (mReactInstanceManager != null) {
             mReactInstanceManager.onPause();
         }
@@ -145,6 +88,7 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, CBL_URL);
         if (mReactInstanceManager != null) {
             mReactInstanceManager.onResume(this);
         }
@@ -153,6 +97,7 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
 
     @Override
     public void onBackPressed() {
+        Log.d(TAG, CBL_URL);
         if (mReactInstanceManager != null) {
             mReactInstanceManager.onBackPressed();
         } else {
@@ -162,6 +107,7 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
+        Log.d(TAG, CBL_URL);
         if (keyCode == KeyEvent.KEYCODE_MENU && mReactInstanceManager != null) {
             mReactInstanceManager.showDevOptionsDialog();
             return true;
