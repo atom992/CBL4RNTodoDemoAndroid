@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "com.example.atom.cbl4rntododemoandroid"
+        applicationId "com.couchbase.todolitereactnativeandroid"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
@@ -17,8 +17,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-// workaround for "duplicate files during packaging of APK" issue
-// see https://groups.google.com/d/msg/adt-dev/bl5Rc4Szpzg/wC8cylTWuIEJ
+    // workaround for "duplicate files during packaging of APK" issue
+    // see https://groups.google.com/d/msg/adt-dev/bl5Rc4Szpzg/wC8cylTWuIEJ
     packagingOptions {
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/LICENSE'
@@ -27,13 +27,12 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.5.0'
-//    compile 'com.couchbase.lite:couchbase-lite-android:1.1.0'
-//    compile 'com.couchbase.lite:couchbase-lite-java-core:1.1.0'
-//    compile 'com.couchbase.lite:couchbase-lite-java-listener:1.1.0'
-//    compile 'com.couchbase.lite:couchbase-lite-java-javascript:1.1.0'
-    compile 'com.facebook.react:react-native:0.13.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.0'
 
+    compile 'com.couchbase.lite:couchbase-lite-android:1.1.0'
+    compile 'com.couchbase.lite:couchbase-lite-java-listener:1.1.0'
+    compile 'com.couchbase.lite:couchbase-lite-java-javascript:1.1.0'
+    compile 'com.facebook.react:react-native:0.13.0'
 }
